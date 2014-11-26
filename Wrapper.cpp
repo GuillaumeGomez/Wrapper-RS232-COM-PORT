@@ -151,8 +151,9 @@ bool Wrapper::OpenCOM(std::string nId)
 #if defined (WIN32)
 
   nId = "\\\\.\\COM" + nId;
+  std::wstring FilePath(nId.begin(), nId.end());
 
-  g_hCOM = CreateFile(nId.c_str(), GENERIC_READ|GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_SYSTEM, NULL);
+  g_hCOM = CreateFile(FilePath.c_str(), GENERIC_READ|GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_SYSTEM, NULL);
   if (g_hCOM == INVALID_HANDLE_VALUE)
     return false;
 
